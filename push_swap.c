@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:09:31 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/09 19:18:56 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/10 19:22:46 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,14 @@ void	free_split(char **arr)
 	}
 	free(arr);
 }
+
 int	split_arg_string(const char **argv, t_vec *a)
 {
 	int		j;
 	int		k;
-	char 	**ptr;
+	char	**ptr;
 	int		num;
-	
+
 	k = 0;
 	j = 0;
 	ptr = ft_split(argv[1], ' ');
@@ -63,15 +64,15 @@ int	process_arguments(int argc, const char **argv, t_vec *a)
 	int		i;
 	int		j;
 	int		num;
-	
+
 	i = 1;
 	j = 0;
 	if (argc == 2)
 	{
 		if (!split_arg_string(argv, a))
-			return(0);
+			return (0);
 	}
-	else 
+	else
 	{
 		while (i < argc)
 		{
@@ -95,55 +96,82 @@ int	process_arguments(int argc, const char **argv, t_vec *a)
 	return (1);
 }
 
-void	print_vector(t_vec *vec)
-{
-	int	i;
-	
-	i = 0;
-	while (i < vec->len)
-	{
-		ft_printf("Vector element %d: %d\n", i, *(int *)vec_get(vec, i));
-		i++;
-	}
-}
 void	sort_small(t_vec *a)
 {
-	ft_printf("Vec len is: %d\n", a->len);
+	
 	if (a->len == 2)
-		if (*(int *)vec_get(a, 0) > *(int *)vec_get(a, 1))
+	{
+		ft_printf("Vec len should be 2 and is: %d\n", a->len);
+		if (vec_int(a, 0) > vec_int(a, 1))
 			sa(a);
+	}
 	else
 	{
-		if (*(int *)vec_get(a, 0) > *(int *)vec_get(a, 1))
+		ft_printf("Vec len should be 3 and is: %d\n", a->len);
+		if ((vec_int(a, 0)) > vec_int(a, 1) && vec_int(a, 0) < vec_int(a, 2))
+			sa(a);
+		else if ((vec_int(a, 0)) < vec_int(a, 1) && vec_int(a, 0) > vec_int(a, 2))
+			rra(a);
+		else if ((vec_int(a, 0)) > vec_int(a, 2) && vec_int(a, 2) > vec_int(a, 1))
+			ra(a);
+		else if ((vec_int(a, 0)) < vec_int(a, 1) && vec_int(a, 1) > vec_int(a, 2))
 		{
 			sa(a);
-			//if (*(int *)vec_get(a, 1) > *(int *)vec_get(a, 2))
+			ra(a);
 		}
+		else if ((vec_int(a, 0)) > vec_int(a, 1) && vec_int(a, 1) > vec_int(a, 2))
+		{
+			sa(a);
+			rra(a);
+		}			
 	}
-	
-		
 }
 
 int	main(int argc, const char **argv)
 {
 	t_vec	a;
 	t_vec	b;
-	
+
 	if (argc <= 1)
 	{
 		ft_printf("\nPlease provide the initial list of numbers\n");
 		return (0);
 	}
-
 	vec_new(&a, 0, sizeof(int));
 	vec_new(&b, 0, sizeof(int));
-	
 	if (process_arguments(argc, argv, &a))
 		ft_printf("\nSuccessfully processed valid arguments\n");
 	print_vector(&a);
 	if (a.len <= 3)
 		sort_small(&a);
-	vec_free(&a);
+	
+	// ft_printf("\nVector a:\n");
+	// print_vector(&a);
+	// ft_printf("\nVector b:\n");
+	// print_vector(&b);
+	// ft_printf("\nPushing elements:\n");
+	// pb(&a, &b);
+	// pb(&a, &b);
+	// pb(&a, &b);
+	// pb(&a, &b);
+	// pa(&a, &b);
+	// ft_printf("\nVector a:\n");
+	// print_vector(&a);
+	// ft_printf("\nVector b:\n");
+	// print_vector(&b);
+	// ft_printf("\nRotating elements:\n");
+	// rr(&a, &b);
+	// ft_printf("\nVector a:\n");
+	// print_vector(&a);
+	// ft_printf("\nVector b:\n");
+	// print_vector(&b);
+	// ft_printf("\nReverse rotating elements:\n");
+	// rrr(&a, &b);
+	ft_printf("\nVector a:\n");
+	print_vector(&a);
+	ft_printf("\nVector b:\n");
+	print_vector(&b);
+	//vec_free(&a);
+	vec_free(&b);
 	return (1);
 }
-
