@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 18:38:23 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/10 18:49:02 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/11 16:20:44 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*sa (swap a): Swap the first 2 elements at the top of stack a.
 Do nothing if there is only one or no elements.*/
 
-void	sa(t_vec *a)
+void	sa(t_vec *a, bool check)
 {
 	int	num;
 	int	*ptr;
@@ -24,12 +24,13 @@ void	sa(t_vec *a)
 	ptr = &num;
 	vec_insert(a, ptr, 0);
 	vec_remove(a, 2);
-	ft_printf("sa\n");
+	if (check == 1)
+		ft_printf("sa\n");
 }
 
 /* sb (swap b): Swap the first 2 elements at the top of stack b.
 Do nothing if there is only one or no elements.*/
-void	sb(t_vec *b)
+void	sb(t_vec *b, bool check)
 {
 	int	*ptr;
 	int	num;
@@ -38,14 +39,15 @@ void	sb(t_vec *b)
 	ptr = &num;
 	vec_insert(b, ptr, 0);
 	vec_remove(b, 2);
-	ft_printf("sb\n");
+	if (check == 1)
+		ft_printf("sb\n");
 }
 
 /* ss : sa and sb at the same time.*/
 void	ss(t_vec *a, t_vec *b)
 {
-	sa(a);
-	sb(b);
+	sa(a, 0);
+	sb(b, 0);
 	ft_printf("ss\n");
 }
 
@@ -75,7 +77,7 @@ void	pb(t_vec *a, t_vec *b)
 
 /* ra (rotate a): Shift up all elements of stack a by 1.
 The first element becomes the last one.*/
-void	ra(t_vec *a)
+void	ra(t_vec *a, bool check)
 {
 	int	num;
 	int	*ptr;
@@ -84,12 +86,13 @@ void	ra(t_vec *a)
 	ptr = &num;
 	vec_remove(a, 0);
 	vec_push(a, ptr);
-	ft_printf("ra\n");
+	if (check == 1)
+		ft_printf("ra\n");
 }
 
 /* rb (rotate b): Shift up all elements of stack b by 1.
 The first element becomes the last one.*/
-void	rb(t_vec *b)
+void	rb(t_vec *b, bool check)
 {
 	int	num;
 	int	*ptr;
@@ -98,20 +101,21 @@ void	rb(t_vec *b)
 	ptr = &num;
 	vec_remove(b, 0);
 	vec_push(b, ptr);
-	ft_printf("rb\n");
+	if (check == 1)
+		ft_printf("rb\n");
 }
 
 /*rr : ra and rb at the same time.*/
 void	rr(t_vec *a, t_vec *b)
 {
-	ra(a);
-	rb(b);
+	ra(a, 0);
+	rb(b, 0);
 	ft_printf("rr\n");
 }
 
 /*rra (reverse rotate a): Shift down all elements of stack a by 1.
 The last element becomes the first one.*/
-void	rra(t_vec *a)
+void	rra(t_vec *a, bool check)
 {
 	int	num;
 	int	*ptr;
@@ -120,12 +124,13 @@ void	rra(t_vec *a)
 	ptr = &num;
 	vec_remove(a, a->len - 1);
 	vec_insert(a, ptr, 0);
-	ft_printf("rra\n");
+	if (check == 1)
+		ft_printf("rra\n");
 }
 
 /*rrb (reverse rotate b): Shift down all elements of stack b by 1.
 The last element becomes the first one.*/
-void	rrb(t_vec *b)
+void	rrb(t_vec *b, bool check)
 {
 	int	num;
 	int	*ptr;
@@ -134,13 +139,14 @@ void	rrb(t_vec *b)
 	ptr = &num;
 	vec_remove(b, b->len - 1);
 	vec_insert(b, ptr, 0);
-	ft_printf("rrb\n");
+	if (check == 1)
+		ft_printf("rrb\n");
 }
 
 /*rrr : rra and rrb at the same time.*/
 void	rrr(t_vec *a, t_vec *b)
 {
-	rra(a);
-	rrb(b);
+	rra(a, 0);
+	rrb(b, 0);
 	ft_printf("rrr\n");
 }
