@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:09:31 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/11 18:58:22 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/12 16:07:10 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,50 +159,103 @@ void	sort_small(t_vec *a)
 	}
 }
 
-void	sort_four(t_vec *a, t_vec *b)
-{
-	pb(a, b);
-	sort_small(a);
-	pa(a, b);
-	if (vec_int(a, 0) > vec_int(a, 1) && vec_int(a, 0) > vec_int(a, 2))
-	{
-		if (vec_int(a, 0) > vec_int(a, 3))
-			ra(a, 1);
-		else
-		{
-			rra(a, 1);
-			sa(a, 1);
-			ra(a, 1);
-			ra(a, 1);				
-		}
-	}
-	else if (vec_int(a, 0) > vec_int(a, 1))
-		sa(a, 1);
-}
+// void	sort_four(t_vec *a, t_vec *b)
+// {
+// 	pb(a, b);
+// 	if (vec_int(b, 1) > vec_int(b, 0))
+// 	 	sb(b, 1);
+// 	sort_small(a);
+
+// 	if (vec_int(a, 2) > vec_int(b, 0) && vec_int(a, 2) > vec_int(b, 1) && vec_int(b, 1) > vec_int(a, 1))
+// 	{
+// 		rra(a, 1);
+// 		pa(a, b);
+// 		pa(a, b);
+// 		ra(a, 1);
+// 		ra(a, 1);
+// 		ra(a, 1);
+// 		return ;
+// 	}
+	
+// 	pa(a, b);
+// 	if (vec_int(a, 0) > vec_int(a, 1) && vec_int(a, 0) > vec_int(a, 2))
+// 	{
+// 		if (vec_int(a, 0) > vec_int(a, 3))
+// 			ra(a, 1);
+// 		else
+// 		{
+// 			rra(a, 1);
+// 			sa(a, 1);
+// 			ra(a, 1);
+// 			ra(a, 1);				
+// 		}
+// 	}
+// 	else if (vec_int(a, 0) > vec_int(a, 1))
+// 		sa(a, 1);
+// }
 
 void	sort_five(t_vec *a, t_vec *b)
 {
 	pb(a, b);
-	sort_four(a, b);
-	pa(a, b);
-	if (vec_int(a, 0) > vec_int(a, 1) && vec_int(a, 0) < vec_int(a, 2))
-		sa(a, 1);
-	else if (vec_int(a, 0) > vec_int(a, 2) && vec_int(a, 0) < vec_int(a, 3))
+	//sort_four(a, b);
+	pb(a, b);
+	sort_small(a);
+	if (vec_int(b, 1) > vec_int(b, 0))
+ 	 	sb(b, 1);
+	if (vec_int(b, 0) < vec_int(a, 0) && vec_int(b, 1) < vec_int(a, 0))
 	{
-		sa(a, 1);
-		ra(a, 1);
-		sa(a, 1);
-		rra(a, 1);		
+		pa(a, b);
+		pa(a, b);
+		return ;
 	}
-	else if (vec_int(a, 0) > vec_int(a, 3) && vec_int(a, 0) < vec_int(a, 4))
+	// if (vec_int(b, 0) > vec_int(a, 2) && vec_int(b, 1) > vec_int(a, 2))
+	// {
+	// 	pa(a, b);
+	// 	pa(a, b);
+	// 	ra(a, 1);
+	// 	ra(a, 1);
+	// 	return ;
+	// }
+	if (vec_int(b, 0) > vec_int(a, 2))
 	{
+		pa(a, b);
+		while (vec_int(b, 0) < vec_int(a, 3) && vec_int(a, 0) > vec_int(a, 3))
+			rra(a, 1);
+		pa(a, b);
+		while (vec_int(a, 0) > vec_int(a, 3))
+			rra(a, 1);
+		return ;
+	}
+	
+	while (vec_int(b, 0) > vec_int(a, 0) || vec_int(b, 0) < vec_int(a, 2))
 		rra(a, 1);
-		sa(a, 1);
-		ra(a, 1);
-		ra(a, 1);
-	}
-	else if (vec_int(a, 0) > vec_int(a, 4))
-		ra(a, 1);
+	pa(a, b);
+	while (vec_int(a, 0) > vec_int(a, 3) && (vec_int(b, 0) < vec_int(a, 3)))
+		rra(a, 1);
+	pa(a, b);
+	while (vec_int(a, 0) > vec_int(a, 4))
+		rra(a, 1);
+
+
+		
+	// if (vec_int(a, 0) > vec_int(a, 1) && vec_int(a, 0) < vec_int(a, 2))
+	// 	sa(a, 1);
+	// else if (vec_int(a, 0) > vec_int(a, 2) && vec_int(a, 0) < vec_int(a, 3))
+	// {
+	// 	sa(a, 1);
+	// 	ra(a, 1);
+	// 	sa(a, 1);
+	// 	rra(a, 1);		
+	// }
+	// else if (vec_int(a, 0) > vec_int(a, 3) && vec_int(a, 0) < vec_int(a, 4))
+	// {
+	// 	rra(a, 1);
+	// 	sa(a, 1);
+	// 	ra(a, 1);
+	// 	ra(a, 1);
+	// }
+	// else if (vec_int(a, 0) > vec_int(a, 4))
+	// 	ra(a, 1);
 }
 
 int	main(int argc, const char **argv)
@@ -229,8 +282,8 @@ int	main(int argc, const char **argv)
 	//print_vector(&a);
 	if (a.len <= 3)
 		sort_small(&a);
-	if (a.len == 4)
-		sort_four(&a, &b);
+	//if (a.len == 4)
+	//	sort_four(&a, &b);
 	if (a.len == 5)
 		sort_five(&a, &b);
 	

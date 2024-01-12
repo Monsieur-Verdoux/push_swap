@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 18:38:23 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/11 16:20:44 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/12 13:41:24 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	sa(t_vec *a, bool check)
 	int	num;
 	int	*ptr;
 
+	if (a->len <= 1)
+		return ;
 	num = vec_int(a, 1);
 	ptr = &num;
 	vec_insert(a, ptr, 0);
@@ -35,6 +37,8 @@ void	sb(t_vec *b, bool check)
 	int	*ptr;
 	int	num;
 
+	if (b->len <= 1)
+		return ;
 	num = vec_int(b, 1);
 	ptr = &num;
 	vec_insert(b, ptr, 0);
