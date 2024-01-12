@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:09:31 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/12 16:07:10 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/12 17:07:56 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,60 +202,20 @@ void	sort_five(t_vec *a, t_vec *b)
 	sort_small(a);
 	if (vec_int(b, 1) > vec_int(b, 0))
  	 	sb(b, 1);
-	if (vec_int(b, 0) < vec_int(a, 0) && vec_int(b, 1) < vec_int(a, 0))
+	if (vec_int(b, 0) < vec_int(a, 0))
 	{
 		pa(a, b);
 		pa(a, b);
 		return ;
 	}
-	// if (vec_int(b, 0) > vec_int(a, 2) && vec_int(b, 1) > vec_int(a, 2))
-	// {
-	// 	pa(a, b);
-	// 	pa(a, b);
-	// 	ra(a, 1);
-	// 	ra(a, 1);
-	// 	return ;
-	// }
-	if (vec_int(b, 0) > vec_int(a, 2))
-	{
-		pa(a, b);
-		while (vec_int(b, 0) < vec_int(a, 3) && vec_int(a, 0) > vec_int(a, 3))
-			rra(a, 1);
-		pa(a, b);
-		while (vec_int(a, 0) > vec_int(a, 3))
-			rra(a, 1);
-		return ;
-	}
-	
-	while (vec_int(b, 0) > vec_int(a, 0) || vec_int(b, 0) < vec_int(a, 2))
+	while(vec_int(b, 0) < vec_int(a, 2))
 		rra(a, 1);
 	pa(a, b);
-	while (vec_int(a, 0) > vec_int(a, 3) && (vec_int(b, 0) < vec_int(a, 3)))
+	while(vec_int(b, 0) < vec_int(a, 3) && vec_int(a, 0) > vec_int(a, 3))
 		rra(a, 1);
 	pa(a, b);
-	while (vec_int(a, 0) > vec_int(a, 4))
+	while(vec_int(a, 0) > vec_int(a, 4))
 		rra(a, 1);
-
-
-		
-	// if (vec_int(a, 0) > vec_int(a, 1) && vec_int(a, 0) < vec_int(a, 2))
-	// 	sa(a, 1);
-	// else if (vec_int(a, 0) > vec_int(a, 2) && vec_int(a, 0) < vec_int(a, 3))
-	// {
-	// 	sa(a, 1);
-	// 	ra(a, 1);
-	// 	sa(a, 1);
-	// 	rra(a, 1);		
-	// }
-	// else if (vec_int(a, 0) > vec_int(a, 3) && vec_int(a, 0) < vec_int(a, 4))
-	// {
-	// 	rra(a, 1);
-	// 	sa(a, 1);
-	// 	ra(a, 1);
-	// 	ra(a, 1);
-	// }
-	// else if (vec_int(a, 0) > vec_int(a, 4))
-	// 	ra(a, 1);
 }
 
 int	main(int argc, const char **argv)
