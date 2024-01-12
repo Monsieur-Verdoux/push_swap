@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:09:31 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/12 17:07:56 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/12 17:52:41 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,13 @@ int	split_arg_string(const char **argv, t_vec *a)
 	ptr = ft_split(argv[1], ' ');
 	if (!ptr)
 	{
-		write(2, "Error\n", 6);
+		//write(2, "Error\n", 6);
+		free_split(ptr);
+		return (0);
+	}
+	if (ptr[1] == NULL)
+	{
+		//write(2, "Error\n", 6);
 		free_split(ptr);
 		return (0);
 	}
@@ -50,10 +56,10 @@ int	split_arg_string(const char **argv, t_vec *a)
 		while (ptr[k][j])
 		{
 			//ft_printf("Current char: %c\n", ptr[k][j]);
-			if (ptr[k][j] < 48 || ptr[k][j] > 57)
+			if ((ptr[k][j] < 48 || ptr[k][j] > 57) && ptr[k][j] != 45)
 			{
 				//ft_printf("Arguments contain non-number characters\n");
-				write(2, "Error\n", 6);
+				//write(2, "Error\n", 6);
 				free_split(ptr);
 				return (0);
 			}
@@ -66,7 +72,7 @@ int	split_arg_string(const char **argv, t_vec *a)
 			if (num == vec_int(a, f))
 			{
 				free_split(ptr);
-				write(2, "Error\n", 6);
+				//write(2, "Error\n", 6);
 				return (0);
 			}
 			f++;
@@ -103,10 +109,10 @@ int	process_arguments(int argc, const char **argv, t_vec *a)
 			j = 0;
 			while (j < ft_strlen(argv[i]))
 			{
-				if (argv[i][j] < 48 || argv[i][j] > 57)
+				if ((argv[i][j] < 48 || argv[i][j] > 57) && argv[i][j] != 45)
 				{
 					//ft_printf("Arguments contain non-number characters\n");
-					write(2, "Error\n", 6);
+					//write(2, "Error\n", 6);
 					return (0);
 				}
 				j++;
@@ -117,7 +123,7 @@ int	process_arguments(int argc, const char **argv, t_vec *a)
 			{
 				if (num == vec_int(a, f))
 				{
-					write(2, "Error\n", 6);
+					//write(2, "Error\n", 6);
 					return (0);
 				}
 				f++;
@@ -197,10 +203,9 @@ void	sort_small(t_vec *a)
 void	sort_five(t_vec *a, t_vec *b)
 {
 	pb(a, b);
-	//sort_four(a, b);
 	pb(a, b);
 	sort_small(a);
-	if (vec_int(b, 1) > vec_int(b, 0))
+	if (vec_int(b, b->len - 1) > vec_int(b, 0))
  	 	sb(b, 1);
 	if (vec_int(b, 0) < vec_int(a, 0))
 	{
@@ -208,13 +213,13 @@ void	sort_five(t_vec *a, t_vec *b)
 		pa(a, b);
 		return ;
 	}
-	while(vec_int(b, 0) < vec_int(a, 2))
+	while(vec_int(b, 0) < vec_int(a, a->len - 1))
 		rra(a, 1);
 	pa(a, b);
-	while(vec_int(b, 0) < vec_int(a, 3) && vec_int(a, 0) > vec_int(a, 3))
+	while(vec_int(b, 0) < vec_int(a, a->len - 1) && vec_int(a, 0) > vec_int(a, a->len - 1))
 		rra(a, 1);
 	pa(a, b);
-	while(vec_int(a, 0) > vec_int(a, 4))
+	while(vec_int(a, 0) > vec_int(a, a->len - 1))
 		rra(a, 1);
 }
 
@@ -226,15 +231,15 @@ int	main(int argc, const char **argv)
 	if (argc < 2)
 	{
 		write(2, "Error\n", 6);
-		//ft_printf("\nPlease provide the initial list of numbers\n");
-		vec_free(&a);
 		return (0);
 	}
 	vec_new(&a, 0, sizeof(int));
 	vec_new(&b, 0, sizeof(int));
 	if (!process_arguments(argc, argv, &a))
 	{
+		write(2, "Error\n", 6);
 		vec_free(&a);
+		vec_free(&b);
 		return (0);
 	}
 		//write(2, "Error\n", 6);
@@ -244,7 +249,7 @@ int	main(int argc, const char **argv)
 		sort_small(&a);
 	//if (a.len == 4)
 	//	sort_four(&a, &b);
-	if (a.len == 5)
+	if (a.len == 5 || a.len == 4)
 		sort_five(&a, &b);
 	
 	// ft_printf("\nVector a:\n");
