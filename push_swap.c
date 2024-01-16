@@ -6,11 +6,13 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:09:31 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/12 17:52:41 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:22:45 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+//to-do: errors for num > int
 
 void	free_split(char **arr)
 {
@@ -25,60 +27,52 @@ void	free_split(char **arr)
 	free(arr);
 }
 
+int	build_vector(const char **arr, t_vec *a, bool check)
+{
+	int		i;
+	int		j;
+	int		num;
+
+	i = 1;
+	if (check == 0)
+		i = 0;
+	while (arr[i])
+	{
+		j = -1;
+		while (++j < ft_strlen(arr[i]))
+			if (((arr[i][j] < 48 || arr[i][j] > 57) && arr[i][0] != 45) \
+			|| (arr[i][0] == 45 && ft_strlen(arr[i]) == 1))
+				return (0);
+		num = ft_atoi(arr[i]);
+		j = -1;
+		while (++j < a->len)
+			if (num == vec_int(a, j))
+				return (0);
+		vec_push(a, &num);
+		i++;
+	}
+	return (1);
+}
+
 int	split_arg_string(const char **argv, t_vec *a)
 {
-	int		j;
-	int		k;
 	char	**ptr;
-	int		num;
-	int		f;
-	
-	k = 0;
-	j = 0;
+
 	ptr = ft_split(argv[1], ' ');
 	if (!ptr)
 	{
-		//write(2, "Error\n", 6);
 		free_split(ptr);
 		return (0);
 	}
 	if (ptr[1] == NULL)
 	{
-		//write(2, "Error\n", 6);
 		free_split(ptr);
 		return (0);
 	}
-		
-	while (ptr[k])
+	if (!build_vector((const char **)ptr, a, 0))
 	{
-		j = 0;
-		//ft_printf("Split argument %d: %s\n\n", k, ptr[k]);
-		while (ptr[k][j])
-		{
-			//ft_printf("Current char: %c\n", ptr[k][j]);
-			if ((ptr[k][j] < 48 || ptr[k][j] > 57) && ptr[k][j] != 45)
-			{
-				//ft_printf("Arguments contain non-number characters\n");
-				//write(2, "Error\n", 6);
-				free_split(ptr);
-				return (0);
-			}
-			j++;
-		}
-		num = ft_atoi(ptr[k]);
-		f = 0;
-		while (f < a->len)
-		{
-			if (num == vec_int(a, f))
-			{
-				free_split(ptr);
-				//write(2, "Error\n", 6);
-				return (0);
-			}
-			f++;
-		}
-		vec_push(a, &num);
-		k++;
+		free_split(ptr);
+		return (0);
 	}
 	free_split(ptr);
 	return (1);
@@ -86,52 +80,13 @@ int	split_arg_string(const char **argv, t_vec *a)
 
 int	process_arguments(int argc, const char **argv, t_vec *a)
 {
-	int		i;
-	int		j;
-	int		num;
-	int		f;
-
-	i = 1;
-	j = 0;
 	if (argc == 2)
 	{
 		if (!split_arg_string(argv, a))
-		{
-			//write(2, "Error\n", 6);
 			return (0);
-		}
 	}
-	else
-	{
-		while (i < argc)
-		{
-		//	ft_printf("Argument %d: %s\n\n", i, argv[i]);
-			j = 0;
-			while (j < ft_strlen(argv[i]))
-			{
-				if ((argv[i][j] < 48 || argv[i][j] > 57) && argv[i][j] != 45)
-				{
-					//ft_printf("Arguments contain non-number characters\n");
-					//write(2, "Error\n", 6);
-					return (0);
-				}
-				j++;
-			}
-			num = ft_atoi(argv[i]);
-			f = 0;
-			while (f < a->len)
-			{
-				if (num == vec_int(a, f))
-				{
-					//write(2, "Error\n", 6);
-					return (0);
-				}
-				f++;
-			}
-			vec_push(a, &num);
-			i++;
-		}
-	}
+	else if (!build_vector(argv, a, 1))
+		return (0);
 	return (1);
 }
 
@@ -139,87 +94,51 @@ void	sort_small(t_vec *a)
 {
 	if (a->len == 2)
 	{
-		//ft_printf("Vec len should be 2 and is: %d\n", a->len);
 		if (vec_int(a, 0) > vec_int(a, 1))
 			sa(a, 1);
 	}
 	else
 	{
-		//ft_printf("Vec len should be 3 and is: %d\n", a->len);
-		if ((vec_int(a, 0)) > vec_int(a, 1) && vec_int(a, 0) < vec_int(a, 2))
+		if (vec_int(a, 0) > vec_int(a, 1) && vec_int(a, 0) < vec_int(a, 2))
 			sa(a, 1);
-		else if ((vec_int(a, 0)) < vec_int(a, 1) && vec_int(a, 0) > vec_int(a, 2))
+		else if (vec_int(a, 0) < vec_int(a, 1) && vec_int(a, 0) > vec_int(a, 2))
 			rra(a, 1);
-		else if ((vec_int(a, 0)) > vec_int(a, 2) && vec_int(a, 2) > vec_int(a, 1))
+		else if (vec_int(a, 0) > vec_int(a, 2) && vec_int(a, 2) > vec_int(a, 1))
 			ra(a, 1);
-		else if ((vec_int(a, 0)) < vec_int(a, 1) && vec_int(a, 1) > vec_int(a, 2))
+		else if (vec_int(a, 0) < vec_int(a, 1) && vec_int(a, 1) > vec_int(a, 2))
 		{
 			sa(a, 1);
 			ra(a, 1);
 		}
-		else if ((vec_int(a, 0)) > vec_int(a, 1) && vec_int(a, 1) > vec_int(a, 2))
+		else if (vec_int(a, 0) > vec_int(a, 1) && vec_int(a, 1) > vec_int(a, 2))
 		{
 			sa(a, 1);
 			rra(a, 1);
-		}			
+		}
 	}
 }
 
-// void	sort_four(t_vec *a, t_vec *b)
-// {
-// 	pb(a, b);
-// 	if (vec_int(b, 1) > vec_int(b, 0))
-// 	 	sb(b, 1);
-// 	sort_small(a);
-
-// 	if (vec_int(a, 2) > vec_int(b, 0) && vec_int(a, 2) > vec_int(b, 1) && vec_int(b, 1) > vec_int(a, 1))
-// 	{
-// 		rra(a, 1);
-// 		pa(a, b);
-// 		pa(a, b);
-// 		ra(a, 1);
-// 		ra(a, 1);
-// 		ra(a, 1);
-// 		return ;
-// 	}
-	
-// 	pa(a, b);
-// 	if (vec_int(a, 0) > vec_int(a, 1) && vec_int(a, 0) > vec_int(a, 2))
-// 	{
-// 		if (vec_int(a, 0) > vec_int(a, 3))
-// 			ra(a, 1);
-// 		else
-// 		{
-// 			rra(a, 1);
-// 			sa(a, 1);
-// 			ra(a, 1);
-// 			ra(a, 1);				
-// 		}
-// 	}
-// 	else if (vec_int(a, 0) > vec_int(a, 1))
-// 		sa(a, 1);
-// }
-
-void	sort_five(t_vec *a, t_vec *b)
+void	sort_four_five(t_vec *a, t_vec *b)
 {
 	pb(a, b);
 	pb(a, b);
 	sort_small(a);
 	if (vec_int(b, b->len - 1) > vec_int(b, 0))
- 	 	sb(b, 1);
+		sb(b, 1);
 	if (vec_int(b, 0) < vec_int(a, 0))
 	{
 		pa(a, b);
 		pa(a, b);
 		return ;
 	}
-	while(vec_int(b, 0) < vec_int(a, a->len - 1))
+	while (vec_int(b, 0) < vec_int(a, a->len - 1))
 		rra(a, 1);
 	pa(a, b);
-	while(vec_int(b, 0) < vec_int(a, a->len - 1) && vec_int(a, 0) > vec_int(a, a->len - 1))
+	while (vec_int(b, 0) < vec_int(a, a->len - 1) && \
+		vec_int(a, 0) > vec_int(a, a->len - 1))
 		rra(a, 1);
 	pa(a, b);
-	while(vec_int(a, 0) > vec_int(a, a->len - 1))
+	while (vec_int(a, 0) > vec_int(a, a->len - 1))
 		rra(a, 1);
 }
 
@@ -242,44 +161,17 @@ int	main(int argc, const char **argv)
 		vec_free(&b);
 		return (0);
 	}
-		//write(2, "Error\n", 6);
-		//ft_printf("\nunSuccessfully processed valid arguments\n");
-	//print_vector(&a);
 	if (a.len <= 3)
 		sort_small(&a);
-	//if (a.len == 4)
-	//	sort_four(&a, &b);
 	if (a.len == 5 || a.len == 4)
-		sort_five(&a, &b);
-	
-	// ft_printf("\nVector a:\n");
-	// print_vector(&a);
-	// ft_printf("\nVector b:\n");
-	// print_vector(&b);
-	// ft_printf("\nPushing elements:\n");
-	// pb(&a, &b);
-	// pb(&a, &b);
-	// pb(&a, &b);
-	// pb(&a, &b);
-	// pa(&a, &b);
-	// ft_printf("\nVector a:\n");
-	// print_vector(&a);
-	// ft_printf("\nVector b:\n");
-	// print_vector(&b);
-	// ft_printf("\nRotating elements:\n");
-	// rr(&a, &b);
-	// ft_printf("\nVector a:\n");
-	// print_vector(&a);
-	// ft_printf("\nVector b:\n");
-	// print_vector(&b);
-	// ft_printf("\nReverse rotating elements:\n");
-	// rrr(&a, &b);
-	
-	//ft_printf("\nVector a:\n");
-	//print_vector(&a);
-	//ft_printf("\nVector b:\n");
-	//print_vector(&b);
+		sort_four_five(&a, &b);
 	vec_free(&a);
 	vec_free(&b);
 	return (1);
 }
+
+/*need to implement error handling for bigger than int numbers:
+num = ft_atoi(ptr[k]);
+		if (num > 2147483647 || num < -2147483648)
+			return (-1);
+		int_num = (int)num;*/
