@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:12 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/17 18:15:19 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/18 15:43:36 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ void	choose_move(t_vec *a, t_vec *b)
 				{
 					if (vec_int(b, j) == find_max(b))
 					{
-						ft_printf("\n found max \n");
+						//ft_printf("\n found max \n");
 						execute_move(a, b, i, j);
 						return ;
 					}
@@ -168,8 +168,9 @@ void	choose_move(t_vec *a, t_vec *b)
 				{
 					if (vec_int(b, j) == find_min(b))
 					{
-						ft_printf("\n found max \n");
+						//ft_printf("\n found min \n");
 						execute_move(a, b, i, j);
+						sb(b, 1);
 						return ;
 					}
 					j++;

@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:09:31 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/17 16:38:40 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/18 15:09:51 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,17 +194,17 @@ int	main(int argc, const char **argv)
 		vec_free(&b);
 		return (0);
 	}
-	print_vector(&a);
+	// print_vector(&a);
 	// smart_rotate_a(&a, 10);
 	// print_vector(&a);
 	if (a.len <= 3)
 		sort_small(&a);
-	if (a.len == 5 || a.len == 4)
+	else if (a.len == 5 || a.len == 4)
 		sort_four_five(&a, &b);
-	else
+	else if (a.len > 5)
 		sort_all(&a, &b);
-	ft_printf("\n Vector after all rotations: \n");
-	print_vector(&a);
+	// ft_printf("\n Vector after all rotations: \n");
+	//print_vector(&a);
 	vec_free(&a);
 	vec_free(&b);
 	return (1);
