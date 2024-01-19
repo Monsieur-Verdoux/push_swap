@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:12 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/19 16:56:52 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/19 18:55:52 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,7 +286,6 @@ void	choose_move(t_vec *a, t_vec *b)
 			{
 				if (vec_int(b, k) == find_max(b))
 				{
-					//ft_printf("\n Current i is %d, a[i] is %d, current b[k] is %d and max of b is %d\n", i, vec_int(a, i), vec_int(b, k), find_max(b));
 					if (i < a->len - i - 1)
 						cost_a = i;
 					else 
@@ -296,13 +295,11 @@ void	choose_move(t_vec *a, t_vec *b)
 					else
 						cost_b = b->len - k - 1;
 					cost_total = cost_a + cost_b;
-					//ft_printf("\n cost total: %d\n", cost_total);
 					if (cost_total < cost_min)
 					{
 						cost_min = cost_total;
 						ind_a = i;
-						ind_b = k;
-						//ft_printf("\n new cost min: %d\n", cost_min);			
+						ind_b = k;		
 					}
 					// execute_move(a, b, i, k);
 					// return ;
@@ -317,20 +314,40 @@ void	choose_move(t_vec *a, t_vec *b)
 			else 
 				next = j - 1;
 			
-			//ft_printf("\n next: %d\n", next);
 			if (vec_int(a, i) > vec_int(b, j) && vec_int(a, i) < vec_int(b, next))
 			{
-				//ft_printf("\n got here \n");
 				if (i < a->len - i - 1)
-					cost_a = i;
+				{
+					if (j < b->len - j - 1)
+					{
+						if (i > j)
+							cost_total = i;
+						else
+							cost_total = j;
+					}
+					else
+					{
+						cost_a = i;
+						cost_b = b->len - j - 1;
+						cost_total = cost_a + cost_b;
+					}
+				}
 				else 
-					cost_a = a->len - i - 1;
-				if (j < b->len - j - 1)
-					cost_b = j;
-				else
-					cost_b = b->len - j - 1;
-				cost_total = cost_a + cost_b;
-				//ft_printf("\n cost total: %d\n", cost_total);
+				{
+					if (j < b->len - j - 1)
+					{
+						cost_a = a->len - i - 1;
+						cost_b = j;
+						cost_total = cost_a + cost_b;
+					}
+					else
+					{
+						if (a->len - i - 1 > b->len - j - 1)
+							cost_total = a->len - i - 1;
+						else
+							cost_total = b->len - j - 1;
+					}
+				}
 				if (cost_total < cost_min)
 				{
 					cost_min = cost_total;
@@ -343,6 +360,40 @@ void	choose_move(t_vec *a, t_vec *b)
 		j = 0;
 		i++;
 	}
+			
+	// 	while(j < b->len)
+	// 	{
+	// 		if (j == 0)
+	// 			next = b->len - 1;
+	// 		else 
+	// 			next = j - 1;
+			
+	// 		//ft_printf("\n next: %d\n", next);
+	// 		if (vec_int(a, i) > vec_int(b, j) && vec_int(a, i) < vec_int(b, next))
+	// 		{
+	// 			//ft_printf("\n got here \n");
+	// 			if (i < a->len - i - 1)
+	// 				cost_a = i;
+	// 			else 
+	// 				cost_a = a->len - i - 1;
+	// 			if (j < b->len - j - 1)
+	// 				cost_b = j;
+	// 			else
+	// 				cost_b = b->len - j - 1;
+	// 			cost_total = cost_a + cost_b;
+	// 			//ft_printf("\n cost total: %d\n", cost_total);
+	// 			if (cost_total < cost_min)
+	// 			{
+	// 				cost_min = cost_total;
+	// 				ind_a = i;
+	// 				ind_b = j;					
+	// 			}
+	// 		}
+	// 		j++;
+	// 	}
+	// 	j = 0;
+	// 	i++;
+	// }
 	//ft_printf("\n got here \n");
 	execute_move(a, b, ind_a, ind_b);
 }
