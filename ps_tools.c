@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:12 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/18 19:26:44 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/19 16:56:52 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,7 +279,7 @@ void	choose_move(t_vec *a, t_vec *b)
 	//print_vector(b);
 	while (i < a->len)
 	{
-		if (vec_int(a, i) > find_max(b))
+		if (vec_int(a, i) > find_max(b) || vec_int(a, 0) < find_min(b))
 		{
 			k = 0;
 			while (k < b->len)
@@ -309,21 +309,6 @@ void	choose_move(t_vec *a, t_vec *b)
 				}
 				k++;
 			}				
-		}
-		else if (vec_int(a, i) < find_min(b))
-		{
-			j = 0;
-			while (j < b->len)
-			{
-				if (vec_int(b, j) == find_min(b))
-				{
-					//ft_printf("\n found min \n");
-					execute_move(a, b, i, j);
-					sb(b, 1);
-					return ;
-				}
-				j++;
-			}		
 		}
 		while(j < b->len)
 		{
@@ -364,8 +349,8 @@ void	choose_move(t_vec *a, t_vec *b)
 
 void	execute_move(t_vec *a, t_vec *b, int ind_a, int ind_b)
 {
-	smart_rotate_a(a, vec_int(a, ind_a));
-	smart_rotate_b(b, vec_int(b, ind_b));
-	//smart_rotate(a, b, vec_int(a, ind_a), vec_int(b, ind_b));
+	 //smart_rotate_a(a, vec_int(a, ind_a));
+	 //smart_rotate_b(b, vec_int(b, ind_b));
+	smart_rotate(a, b, vec_int(a, ind_a), vec_int(b, ind_b));
 	pb(a, b);
 }
