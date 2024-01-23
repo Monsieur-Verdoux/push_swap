@@ -6,7 +6,11 @@ CFLAGS	:= -Wunreachable-code -Ofast
 
 SRCS	:= push_swap.c \
 			ps_commands.c \
-			ps_tools.c
+			ps_commands_1.c \
+			ps_commands_2.c \
+			ps_tools.c \
+			ps_tools_1.c \
+			ps_tools_2.c \
 
 OBJS	:= ${SRCS:.c=.o}
 

@@ -6,89 +6,11 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:09:31 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/19 16:53:53 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/23 15:39:53 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-//to-do: errors for num > int
-
-void	free_split(char **arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
-}
-
-int	build_vector(const char **arr, t_vec *a, bool check)
-{
-	int		i;
-	int		j;
-	int		num;
-
-	i = 1;
-	if (check == 0)
-		i = 0;
-	while (arr[i])
-	{
-		j = -1;
-		while (++j < ft_strlen(arr[i]))
-			if (((arr[i][j] < 48 || arr[i][j] > 57) && arr[i][0] != 45) \
-			|| (arr[i][0] == 45 && ft_strlen(arr[i]) == 1))
-				return (0);
-		num = ft_atoi(arr[i]);
-		j = -1;
-		while (++j < a->len)
-			if (num == vec_int(a, j))
-				return (0);
-		vec_push(a, &num);
-		i++;
-	}
-	return (1);
-}
-
-int	split_arg_string(const char **argv, t_vec *a)
-{
-	char	**ptr;
-
-	ptr = ft_split(argv[1], ' ');
-	if (!ptr)
-	{
-		free_split(ptr);
-		return (0);
-	}
-	if (ptr[1] == NULL)
-	{
-		free_split(ptr);
-		return (0);
-	}
-	if (!build_vector((const char **)ptr, a, 0))
-	{
-		free_split(ptr);
-		return (0);
-	}
-	free_split(ptr);
-	return (1);
-}
-
-int	process_arguments(int argc, const char **argv, t_vec *a)
-{
-	if (argc == 2)
-	{
-		if (!split_arg_string(argv, a))
-			return (0);
-	}
-	else if (!build_vector(argv, a, 1))
-		return (0);
-	return (1);
-}
 
 void	sort_small(t_vec *a)
 {
@@ -115,26 +37,6 @@ void	sort_small(t_vec *a)
 			sa(a, 1);
 			rra(a, 1);
 		}
-	}
-}
-
-void	reverse_sort_three(t_vec *b)
-{
-	if (vec_int(b, 0) > vec_int(b, 1) && vec_int(b, 2) > vec_int(b, 0))
-		rrb(b, 1);
-	else if (vec_int(b, 0) < vec_int(b, 1) && vec_int(b, 2) < vec_int(b, 0))
-		sb(b, 1);
-	else if (vec_int(b, 1) < vec_int(b, 2) && vec_int(b, 0) > vec_int(b, 2))
-	{
-		rrb(b, 1);
-		sb(b, 1);
-	}
-	else if (vec_int(b, 0) > vec_int(b, 1) && vec_int(b, 2) > vec_int(b, 0))
-	    rrb(b, 1);
-	else if (vec_int(b, 0) < vec_int(b, 1) && vec_int(b,1) < vec_int(b, 2))
-	{
-		rb(b, 1);
-		sb(b, 1);
 	}
 }
 
@@ -168,12 +70,10 @@ void	sort_all(t_vec *a, t_vec *b)
 	pb(a, b);
 	if (vec_int(b, 0) < vec_int(b, 1))
 		sb(b, 1);
-	//pb(a, b);
-	//reverse_sort_three(b);
-	while(a->len > 0)
+	while (a->len > 0)
 		choose_move(a, b);
-	smart_rotate_b(b, find_max(b));
-	while(b->len > 0)
+	smart_rotate(a, b, 0, find_max(b));
+	while (b->len > 0)
 		pa(a, b);
 }
 
@@ -196,17 +96,12 @@ int	main(int argc, const char **argv)
 		vec_free(&b);
 		return (0);
 	}
-	// print_vector(&a);
-	// smart_rotate_a(&a, 10);
-	// print_vector(&a);
 	if (a.len <= 3)
 		sort_small(&a);
 	else if (a.len == 5 || a.len == 4)
 		sort_four_five(&a, &b);
 	else if (a.len > 5)
 		sort_all(&a, &b);
-	// ft_printf("\n Vector after all rotations: \n");
-	//print_vector(&a);
 	vec_free(&a);
 	vec_free(&b);
 	return (1);

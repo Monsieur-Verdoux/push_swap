@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:12 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/23 14:43:46 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/23 15:47:47 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	find_max(t_vec *vec)
 
 	i = 0;
 	max = vec_int(vec, 0);
-	while(i < vec->len)
+	while (i < vec->len)
 	{
 		if (vec_int(vec, i) > max)
 			max = vec_int(vec, i);
@@ -61,67 +61,63 @@ int	find_min(t_vec *vec)
 	return (min);
 }
 
-void	smart_rotate_a(t_vec *a, int target)
-{
-	int	i;
+// void	smart_rotate_a(t_vec *a, int target)
+// {
+// 	int	i;
 
-	i = 0;
-	while (i < a->len)
-	{
-		if (vec_int(a, i) == target)
-		{
-			if (a->len - i - 1 > i)
-			{
-				while (i > 0)
-				{
-					ra(a, 1);
-					i--;
-				}
-			}
-			else
-			{
-				i = a->len - i;
-				while (i > 0)
-				{
-					rra(a, 1);
-					i--;
-				}
-			}
-		}
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (i < a->len)
+// 	{
+// 		if (vec_int(a, i) == target)
+// 		{
+// 			if (a->len - i - 1 > i)
+// 			{
+// 				i++;
+// 				while (i-- > 0)
+// 					ra(a, 1);
+// 			}
+// 			else
+// 			{
+// 				i = a->len - i;
+// 				while (i > 0)
+// 				{
+// 					rra(a, 1);
+// 					i--;
+// 				}
+// 			}
+// 		}
+// 		i++;
+// 	}
+// }
 
-void	smart_rotate_b(t_vec *b, int target)
-{
-	int	i;
+// void	smart_rotate_b(t_vec *b, int target)
+// {
+// 	int	i;
 
-	i = 0;
-	while (i < b->len)
-	{
-		if (vec_int(b, i) == target)
-		{
-			if (b->len - i - 1 > i)
-			{
-				while (i > 0)
-				{
-					rb(b, 1);
-					i--;
-				}
-			}
-			else
-			{
-				i = b->len - i;
-				while (i > 0)
-				{
-					rrb(b, 1);
-					i--;
-				}
-			}
-		}
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (i < b->len)
+// 	{
+// 		if (vec_int(b, i) == target)
+// 		{
+// 			if (b->len - i - 1 > i)
+// 			{
+// 				i++;
+// 				while (i-- > 0)
+// 					rb(b, 1);
+// 			}
+// 			else
+// 			{
+// 				i = b->len - i;
+// 				while (i > 0)
+// 				{
+// 					rrb(b, 1);
+// 					i--;
+// 				}
+// 			}
+// 		}
+// 		i++;
+// 	}
+// }
 
 void	smart_rotate(t_vec *a, t_vec *b, int target_a, int target_b)
 {
@@ -201,7 +197,7 @@ void	smart_rotate(t_vec *a, t_vec *b, int target_a, int target_b)
 						rra(a, 1);
 						i--;
 					}
-					return ;					
+					return ;
 				}
 			}
 			else
@@ -252,14 +248,17 @@ void	smart_rotate(t_vec *a, t_vec *b, int target_a, int target_b)
 						ra(a, 1);
 						i--;
 					}
-					return ;					
+					return ;
 				}
 			}
 		}
 		j++;
 	}
 }
-
+// void	initialize_struct(t_vec *a, t_vec *b)
+// {
+	
+// }
 void	choose_move(t_vec *a, t_vec *b)
 {
 	int	i;
