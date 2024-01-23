@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:12 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/23 17:44:10 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/23 19:26:46 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,28 @@
 
 void	handle_min_max(t_vec *a, t_vec *b, t_move *info)
 {
-	info->j = 0;
-	while (info->j < b->len)
+	info->k = 0;
+	while (info->k < b->len)
 	{
-		if (vec_int(b, info->j) == find_max(b))
+		if (vec_int(b, info->k) == find_max(b))
 		{
 			if (info->i < a->len - info->i - 1)
 				info->cost_a = info->i;
 			else
 				info->cost_a = a->len - info->i - 1;
-			if (info->j < b->len - info->j - 1)
-				info->cost_b = info->j;
+			if (info->k < b->len - info->k - 1)
+				info->cost_b = info->k;
 			else
-				info->cost_b = b->len - info->j - 1;
+				info->cost_b = b->len - info->k - 1;
 			info->cost_total = info->cost_a + info->cost_b;
 			if (info->cost_total < info->cost_min)
 			{
 				info->cost_min = info->cost_total;
 				info->ind_a = info->i;
-				info->ind_b = info->j;
+				info->ind_b = info->k;
 			}
 		}
-		info->j++;
+		info->k++;
 	}
 }
 
@@ -43,6 +43,7 @@ void	forward_a_cost(t_vec *a, t_vec *b, t_move *info)
 {
 	if (info->j < b->len - info->j - 1)
 	{
+		info->b_forw = 1;
 		if (info->i > info->j)
 			info->cost_total = info->i;
 		else
@@ -50,6 +51,7 @@ void	forward_a_cost(t_vec *a, t_vec *b, t_move *info)
 	}
 	else
 	{
+		info->b_rev = 1;
 		info->cost_a = info->i;
 		info->cost_b = b->len - info->j - 1;
 		info->cost_total = info->cost_a + info->cost_b;
@@ -60,12 +62,14 @@ void	reverse_a_cost(t_vec *a, t_vec *b, t_move *info)
 {
 	if (info->j < b->len - info->j - 1)
 	{
+		info->b_forw = 1;
 		info->cost_a = a->len - info->i - 1;
 		info->cost_b = info->j;
 		info->cost_total = info->cost_a + info->cost_b;
 	}
 	else
 	{
+		info->b_rev = 1;
 		if (a->len - info->i - 1 > b->len - info->j - 1)
 			info->cost_total = a->len - info->i - 1;
 		else
@@ -76,9 +80,15 @@ void	reverse_a_cost(t_vec *a, t_vec *b, t_move *info)
 void	determine_direction_cost(t_vec *a, t_vec *b, t_move *info)
 {
 	if (info->i < a->len - info->i - 1)
+	{
+		info->a_forw = 1;
 		forward_a_cost(a, b, info);
+	}
 	else
+	{
+		info->a_rev = 1;
 		reverse_a_cost(a, b, info);
+	}
 	if (info->cost_total < info->cost_min)
 	{
 		info->cost_min = info->cost_total;
@@ -108,7 +118,7 @@ void	choose_move(t_vec *a, t_vec *b, t_move *info)
 		info->j = 0;
 		info->i++;
 	}
-	smart_rotate(a, b, vec_int(a, info->ind_a), vec_int(b, info->ind_b));
+	smart_rotate(a, b, info);
 	pb(a, b);
 }
 
