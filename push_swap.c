@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:09:31 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/23 15:39:53 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:20:48 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,14 @@ void	sort_four_five(t_vec *a, t_vec *b)
 
 void	sort_all(t_vec *a, t_vec *b)
 {
+	t_move	info;
+
 	pb(a, b);
 	pb(a, b);
 	if (vec_int(b, 0) < vec_int(b, 1))
 		sb(b, 1);
 	while (a->len > 0)
-		choose_move(a, b);
+		choose_move(a, b, &info);
 	smart_rotate(a, b, 0, find_max(b));
 	while (b->len > 0)
 		pa(a, b);
