@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:09:31 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/23 19:26:23 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:58:23 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,9 @@ void	sort_all(t_vec *a, t_vec *b)
 	pb(a, b);
 	if (vec_int(b, 0) < vec_int(b, 1))
 		sb(b, 1);
-	while (a->len > 0)
+	while (a->len > 3)
 		choose_move(a, b, &info);
+	sort_small(a);
 	info.ind_a = 0;
 	i = 0;
 	while (i < b->len)
@@ -88,7 +89,13 @@ void	sort_all(t_vec *a, t_vec *b)
 	}
 	smart_rotate(a, b, &info);
 	while (b->len > 0)
+	{
+		while (vec_int(a, a->len - 1) < vec_int(a, 0) && vec_int(a, a->len - 1) > vec_int(b, 0))
+			rra(a, 1);
 		pa(a, b);
+	}
+	while (vec_int(a, a->len - 1) < vec_int(a, 0))
+		rra(a, 1);
 }
 
 int	main(int argc, const char **argv)
