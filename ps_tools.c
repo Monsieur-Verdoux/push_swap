@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:12 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/24 15:37:10 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/24 18:51:46 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,16 @@ void	handle_min_max(t_vec *a, t_vec *b, t_move *info)
 				info->cost_b = info->k;
 			else
 				info->cost_b = b->len - info->k - 1;
-			if (info->i < a->len - info->i - 1 && info->k < b->len - info->k - 1)
+			if (info->i < a->len - info->i - 1 \
+				&& info->k < b->len - info->k - 1)
 			{
 				if (info->i > info->k)
 					info->cost_total = info->i;
 				else
 					info->cost_total = info->k;
 			}
-			if (info->i > a->len - info->i - 1 && info->k > b->len - info->k - 1)
+			if (info->i > a->len - info->i - 1 \
+				&& info->k > b->len - info->k - 1)
 			{
 				if (a->len - info->i - 1 > b->len - info->k - 1)
 					info->cost_total = a->len - info->i - 1;
@@ -48,7 +50,6 @@ void	handle_min_max(t_vec *a, t_vec *b, t_move *info)
 				info->cost_min = info->cost_total;
 				info->ind_a = info->i;
 				info->ind_b = info->k;
-				//ft_printf("Cost total determined to be %d", info->cost_total);
 			}
 		}
 		info->k++;
@@ -116,7 +117,8 @@ void	choose_move(t_vec *a, t_vec *b, t_move *info)
 				info->next = b->len - 1;
 			else
 				info->next = info->j - 1;
-			if (vec_int(a, info->i) > vec_int(b, info->j) && vec_int(a, info->i) < vec_int(b, info->next))
+			if (vec_int(a, info->i) > vec_int(b, info->j) \
+				&& vec_int(a, info->i) < vec_int(b, info->next))
 				determine_direction_cost(a, b, info);
 			info->j++;
 		}
