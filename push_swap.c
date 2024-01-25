@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:09:31 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/25 16:20:58 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/25 18:20:43 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	rebuild_a(t_vec *a, t_vec *b)
 void	sort_all(t_vec *a, t_vec *b)
 {
 	t_move	info;
-	int		i;
+	size_t	i;
 
 	pb(a, b);
 	pb(a, b);

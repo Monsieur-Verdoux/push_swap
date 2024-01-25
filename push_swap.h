@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:09:46 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/25 16:20:59 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/25 18:25:22 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,18 @@
 
 typedef struct s_move
 {
-	int		i;
-	int		j;
-	int		k;
-	int		next;
-	int		cost_total;
-	int		cost_a;
-	int		cost_b;
-	int		cost_min;
-	int		ind_a;
-	int		ind_b;
-	bool	a_forw;
-	bool	b_forw;
+	size_t		i;
+	size_t		j;
+	size_t		k;
+	int			next;
+	int			cost_total;
+	int			cost_a;
+	int			cost_b;
+	int			cost_min;
+	size_t		ind_a;
+	size_t		ind_b;
+	bool		a_forw;
+	bool		b_forw;
 }	t_move;
 
 void	sa(t_vec *vec, bool check);
@@ -51,6 +51,7 @@ void	execute_move(t_vec *a, t_vec *b, int ind_a, int ind_b);
 void	smart_rotate(t_vec *a, t_vec *b, t_move *info);
 int		process_arguments(int argc, const char **argv, t_vec *a);
 void	initialize_info_struct(t_vec *a, t_vec *b, t_move *info);
+void	smart_rotate(t_vec *a, t_vec *b, t_move *info);
 
 #endif
 

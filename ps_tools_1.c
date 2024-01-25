@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 15:31:58 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/23 15:33:10 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/25 18:24:00 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	free_split(char **arr)
 
 int	build_vector(const char **arr, t_vec *a, bool check)
 {
-	int		i;
-	int		j;
+	size_t	i;
+	size_t	j;
 	int		num;
 
 	i = 1;

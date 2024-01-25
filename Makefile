@@ -2,15 +2,16 @@ NAME	:= push_swap
 
 CC		:= cc
 
-CFLAGS	:= -Wunreachable-code -Ofast
+CFLAGS	:= -Wall -Wextra -Werror -Wunreachable-code -Ofast
 
 SRCS	:= push_swap.c \
 			ps_commands.c \
 			ps_commands_1.c \
 			ps_commands_2.c \
-			ps_tools.c \
+			choose_move.c \
 			ps_tools_1.c \
 			ps_tools_2.c \
+			smart_rotate.c \
 
 OBJS	:= ${SRCS:.c=.o}
 
