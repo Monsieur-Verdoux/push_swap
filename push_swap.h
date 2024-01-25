@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:09:46 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/23 18:58:27 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/25 16:20:59 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ typedef struct s_move
 	int		ind_a;
 	int		ind_b;
 	bool	a_forw;
-	bool	a_rev;
 	bool	b_forw;
-	bool	b_rev;
 }	t_move;
 
 void	sa(t_vec *vec, bool check);
