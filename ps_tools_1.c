@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 15:31:58 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/26 14:31:58 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:34:19 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	build_vector(const char **arr, t_vec *a, bool check)
 		while (++j < ft_strlen(arr[i]))
 			if (((arr[i][j] < 48 || arr[i][j] > 57) && arr[i][0] != 45) || \
 			(arr[i][0] == 45 && ft_strlen(arr[i]) == 1) || \
-				(arr[i][j] == 45 && j != 0))
+				((arr[i][j] < 48 || arr[i][j] > 57) && j != 0))
 				return (0);
 		temp_num = ft_atoi_long(arr[i]);
 		if (temp_num > 2147483647 || temp_num < -2147483648)
@@ -78,11 +78,6 @@ int	split_arg_string(const char **argv, t_vec *a)
 		free_split(ptr);
 		return (0);
 	}
-	if (ptr[1] == NULL)
-	{
-		free_split(ptr);
-		return (0);
-	}
 	if (!build_vector((const char **)ptr, a, 0))
 	{
 		free_split(ptr);
@@ -98,8 +93,6 @@ int	process_arguments(int argc, const char **argv, t_vec *a)
 	{
 		if (!split_arg_string(argv, a))
 			return (0);
-		else
-			return (1);
 	}
 	else if (!build_vector(argv, a, 1))
 		return (0);

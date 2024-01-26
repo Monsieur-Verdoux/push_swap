@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:09:31 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/26 13:06:05 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:32:27 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,42 +105,13 @@ void	sort_all(t_vec *a, t_vec *b)
 	smart_rotate(a, b, &info);
 	rebuild_a(a, b);
 }
-/*	i = 4;
-	while (vec_int(b, 0) < vec_int(a, a->len - 1) && i-- > 0)
-		rra(a, 1);*/
 
-int	main(int argc, const char **argv)
+void	push_swap(t_vec *a, t_vec *b)
 {
-	t_vec	a;
-	t_vec	b;
-
-	if (argc < 2)
-	{
-		write(2, "Error\n", 6);
-		return (0);
-	}
-	vec_new(&a, 0, sizeof(int));
-	vec_new(&b, 0, sizeof(int));
-	if (!process_arguments(argc, argv, &a))
-	{
-		write(2, "Error\n", 6);
-		vec_free(&a);
-		vec_free(&b);
-		return (0);
-	}
-	if (a.len <= 3)
-		sort_small(&a);
-	else if (a.len == 5 || a.len == 4)
-		sort_four_five(&a, &b);
-	else if (a.len > 5)
-		sort_all(&a, &b);
-	vec_free(&a);
-	vec_free(&b);
-	return (1);
+	if (a->len <= 3)
+		sort_small(a);
+	else if (a->len == 5 || a->len == 4)
+		sort_four_five(a, b);
+	else if (a->len > 5)
+		sort_all(a, b);
 }
-
-/*need to implement error handling for bigger than int numbers:
-num = ft_atoi(ptr[k]);
-		if (num > 2147483647 || num < -2147483648)
-			return (-1);
-		int_num = (int)num;*/

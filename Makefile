@@ -12,6 +12,7 @@ SRCS	:= push_swap.c \
 			ps_tools_1.c \
 			ps_tools_2.c \
 			smart_rotate.c \
+			main.c
 
 OBJS	:= ${SRCS:.c=.o}
 

@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 15:32:05 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/25 18:24:37 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/26 16:20:32 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,29 @@ void	initialize_info_struct(t_vec *a, t_vec *b, t_move *info)
 	info->cost_min = info->ind_a + info->cost_b;
 	info->a_forw = 0;
 	info->b_forw = 0;
+}
+
+void	check_order(t_vec *a, t_vec *b)
+{
+	size_t	i;
+
+	if (a->len == 1)
+	{
+		vec_free(a);
+		vec_free(b);
+		exit(EXIT_SUCCESS);
+	}
+	i = 1;
+	while (i < a->len)
+	{
+		if (vec_int(a, i - 1) < vec_int(a, i))
+			i++;
+		else
+			return ;
+	}
+	vec_free(a);
+	vec_free(b);
+	exit(EXIT_SUCCESS);
 }
 
 // void	smart_rotate(t_vec *a, t_vec *b, t_move *info)

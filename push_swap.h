@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:09:46 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/25 18:25:22 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:33:46 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	smart_rotate(t_vec *a, t_vec *b, t_move *info);
 int		process_arguments(int argc, const char **argv, t_vec *a);
 void	initialize_info_struct(t_vec *a, t_vec *b, t_move *info);
 void	smart_rotate(t_vec *a, t_vec *b, t_move *info);
+void	check_order(t_vec *a, t_vec *b);
+void	push_swap(t_vec *a, t_vec *b);
 
 #endif
 
