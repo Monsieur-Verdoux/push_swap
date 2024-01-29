@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 15:37:34 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/23 15:42:09 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/29 15:22:46 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,12 @@ void	rb(t_vec *b, bool check)
 }
 
 /*rr : ra and rb at the same time.*/
-void	rr(t_vec *a, t_vec *b)
+void	rr(t_vec *a, t_vec *b, bool check)
 {
 	ra(a, 0);
 	rb(b, 0);
-	ft_printf("rr\n");
+	if (check == 1)
+		ft_printf("rr\n");
 }
 
 /*rra (reverse rotate a): Shift down all elements of stack a by 1.

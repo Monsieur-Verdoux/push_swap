@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 18:18:43 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/25 18:49:04 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/29 15:27:04 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	both_forward(t_vec *a, t_vec *b, t_move *info)
 	{
 		while (info->cost_b > 0)
 		{
-			rr(a, b);
+			rr(a, b, 1);
 			info->cost_a--;
 			info->cost_b--;
 		}
@@ -53,7 +53,7 @@ void	both_forward(t_vec *a, t_vec *b, t_move *info)
 	{
 		while (info->cost_a > 0)
 		{
-			rr(a, b);
+			rr(a, b, 1);
 			info->cost_b--;
 			info->cost_a--;
 		}
@@ -68,7 +68,7 @@ void	both_reverse(t_vec *a, t_vec *b, t_move *info)
 	{
 		while (info->cost_b > 0)
 		{
-			rrr(a, b);
+			rrr(a, b, 1);
 			info->cost_a--;
 			info->cost_b--;
 		}
@@ -79,7 +79,7 @@ void	both_reverse(t_vec *a, t_vec *b, t_move *info)
 	{
 		while (info->cost_a > 0)
 		{
-			rrr(a, b);
+			rrr(a, b, 1);
 			info->cost_b--;
 			info->cost_a--;
 		}

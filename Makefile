@@ -14,9 +14,21 @@ SRCS	:= push_swap.c \
 			smart_rotate.c \
 			main.c
 
+BONUS_SRCS := checker_bonus.c \
+				push_swap.c \
+				ps_commands.c \
+				ps_commands_1.c \
+				ps_commands_2.c \
+				choose_move.c \
+				ps_tools_1.c \
+				ps_tools_2.c \
+				smart_rotate.c \
+
 OBJS	:= ${SRCS:.c=.o}
 
-LIBFT	:= libft/libft.a
+BONUS_OBJS := ${BONUS_SRCS:.c=.o} Libft/libft.a 
+
+LIBFT	:= Libft/libft.a
 
 all: ${NAME}
 
@@ -29,13 +41,18 @@ $(NAME): ${OBJS} ${LIBFT}
 ${LIBFT}:
 	@$(MAKE) -C libft/ all
 
+bonus: checker
+
+checker: $(BONUS_OBJS)
+	@$(CC) $(CFLAGS) $(BONUS_OBJS) -o checker
+
 clean:
-	@rm -rf $(OBJS)
+	@rm -rf $(OBJS) checker_bonus.o
 	@$(MAKE) -C libft/ fclean
 
 fclean: clean
-	@rm -rf $(NAME)
+	@rm -rf $(NAME) checker
 
 re: clean all
 
-.PHONY: all, clean, fclean, re
+.PHONY: all, clean, fclean, re, bonus

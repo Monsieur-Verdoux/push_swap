@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:09:31 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/26 17:32:27 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/29 16:08:01 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,24 +42,24 @@ void	sort_small(t_vec *a)
 
 void	sort_four_five(t_vec *a, t_vec *b)
 {
-	pb(a, b);
-	pb(a, b);
+	pb(a, b, 1);
+	pb(a, b, 1);
 	sort_small(a);
 	if (vec_int(b, b->len - 1) > vec_int(b, 0))
 		sb(b, 1);
 	if (vec_int(b, 0) < vec_int(a, 0))
 	{
-		pa(a, b);
-		pa(a, b);
+		pa(a, b, 1);
+		pa(a, b, 1);
 		return ;
 	}
 	while (vec_int(b, 0) < vec_int(a, a->len - 1))
 		rra(a, 1);
-	pa(a, b);
+	pa(a, b, 1);
 	while (vec_int(b, 0) < vec_int(a, a->len - 1) && \
 		vec_int(a, 0) > vec_int(a, a->len - 1))
 		rra(a, 1);
-	pa(a, b);
+	pa(a, b, 1);
 	while (vec_int(a, 0) > vec_int(a, a->len - 1))
 		rra(a, 1);
 }
@@ -73,7 +73,7 @@ void	rebuild_a(t_vec *a, t_vec *b)
 		while (vec_int(a, a->len - 1) < vec_int(a, 0) && \
 			vec_int(a, a->len - 1) > vec_int(b, 0))
 			rra(a, 1);
-		pa(a, b);
+		pa(a, b, 1);
 	}
 	while (vec_int(a, a->len - 1) < vec_int(a, 0))
 		rra(a, 1);
@@ -84,8 +84,8 @@ void	sort_all(t_vec *a, t_vec *b)
 	t_move	info;
 	size_t	i;
 
-	pb(a, b);
-	pb(a, b);
+	pb(a, b, 1);
+	pb(a, b, 1);
 	if (vec_int(b, 0) < vec_int(b, 1))
 		sb(b, 1);
 	while (a->len > 3)

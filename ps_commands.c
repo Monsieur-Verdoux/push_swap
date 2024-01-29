@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 18:38:23 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/23 15:39:04 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/29 16:41:23 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,33 +48,40 @@ void	sb(t_vec *b, bool check)
 }
 
 /* ss : sa and sb at the same time.*/
-void	ss(t_vec *a, t_vec *b)
+void	ss(t_vec *a, t_vec *b, bool check)
 {
 	sa(a, 0);
 	sb(b, 0);
-	ft_printf("ss\n");
+	if (check == 1)
+		ft_printf("ss\n");
 }
 
 /* pa (push a): Take the first element 
 at the top of b and put it at the top of a.
 Do nothing if b is empty.*/
-void	pa(t_vec *a, t_vec *b)
+void	pa(t_vec *a, t_vec *b, bool check)
 {
 	if (!b->memory)
 		return ;
+	if (b->len == 0)
+		return ;
 	vec_insert(a, vec_get(b, 0), 0);
 	vec_remove(b, 0);
-	ft_printf("pa\n");
+	if (check == 1)
+		ft_printf("pa\n");
 }
 
 /* pb (push b): Take the first element 
 at the top of a and put it at the top of b.
 Do nothing if a is empty.*/
-void	pb(t_vec *a, t_vec *b)
+void	pb(t_vec *a, t_vec *b, bool check)
 {
 	if (!a->memory)
 		return ;
+	if (a->len == 0)
+		return ;
 	vec_insert(b, vec_get(a, 0), 0);
 	vec_remove(a, 0);
-	ft_printf("pb\n");
+	if (check == 1)
+		ft_printf("pb\n");
 }

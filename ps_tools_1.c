@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 15:31:58 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/26 17:34:19 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:01:46 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,23 @@ int	split_arg_string(const char **argv, t_vec *a)
 	return (1);
 }
 
-int	process_arguments(int argc, const char **argv, t_vec *a)
+void	process_arguments(int argc, const char **argv, t_vec *a, t_vec *b)
 {
 	if (argc == 2)
 	{
 		if (!split_arg_string(argv, a))
-			return (0);
+		{
+			write(2, "Error\n", 6);
+			vec_free(a);
+			vec_free(b);
+			exit(EXIT_FAILURE);
+		}
 	}
 	else if (!build_vector(argv, a, 1))
-		return (0);
-	return (1);
+	{
+		write(2, "Error\n", 6);
+		vec_free(a);
+		vec_free(b);
+		exit(EXIT_FAILURE);
+	}
 }

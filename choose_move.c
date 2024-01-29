@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_tools.c                                         :+:      :+:    :+:   */
+/*   choose_move.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:12 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/25 17:47:34 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/29 16:08:13 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void	choose_move(t_vec *a, t_vec *b, t_move *info)
 		info->i++;
 	}
 	smart_rotate(a, b, info);
-	pb(a, b);
+	pb(a, b, 1);
 }
 
 // void	execute_move(t_vec *a, t_vec *b, int ind_a, int ind_b)
