@@ -1,8 +1,20 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/01/30 13:46:43 by akovalev          #+#    #+#              #
+#    Updated: 2024/01/30 13:48:14 by akovalev         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME	:= push_swap
 
 CC		:= cc
 
-CFLAGS	:= -Wall -Wextra -Werror -Wunreachable-code -Ofast
+CFLAGS	:= -Wall -Wextra -Werror
 
 SRCS	:= push_swap.c \
 			ps_commands.c \
@@ -22,7 +34,7 @@ BONUS_SRCS := checker_bonus.c \
 				choose_move.c \
 				ps_tools_1.c \
 				ps_tools_2.c \
-				smart_rotate.c \
+				smart_rotate.c
 
 OBJS	:= ${SRCS:.c=.o}
 
@@ -36,7 +48,7 @@ all: ${NAME}
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): ${OBJS} ${LIBFT}
-	$(CC) $(CFLAGS) -o $@ $^
+	@$(CC) $(CFLAGS) -o $@ $^
 
 ${LIBFT}:
 	@$(MAKE) -C libft/ all
