@@ -2,7 +2,7 @@ NAME	:= push_swap
 
 CC		:= cc
 
-CFLAGS	:= -Wall -Wextra -Werror -Wunreachable-code -Ofast
+CFLAGS	:= -Wall -Wextra -Werror
 
 SRCS	:= push_swap.c \
 			ps_commands.c \
