@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 15:31:58 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/29 17:01:46 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/30 18:23:04 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,7 @@ int	split_arg_string(const char **argv, t_vec *a)
 		return (0);
 	ptr = ft_split(argv[1], ' ');
 	if (!ptr)
-	{
-		free_split(ptr);
 		return (0);
-	}
 	if (!build_vector((const char **)ptr, a, 0))
 	{
 		free_split(ptr);

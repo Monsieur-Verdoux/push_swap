@@ -6,7 +6,7 @@
 #    By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/30 13:46:43 by akovalev          #+#    #+#              #
-#    Updated: 2024/01/30 13:48:14 by akovalev         ###   ########.fr        #
+#    Updated: 2024/01/30 18:33:01 by akovalev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,9 +38,9 @@ BONUS_SRCS := checker_bonus.c \
 
 OBJS	:= ${SRCS:.c=.o}
 
-BONUS_OBJS := ${BONUS_SRCS:.c=.o} Libft/libft.a 
-
 LIBFT	:= Libft/libft.a
+
+BONUS_OBJS := ${BONUS_SRCS:.c=.o}
 
 all: ${NAME}
 
@@ -50,13 +50,17 @@ all: ${NAME}
 $(NAME): ${OBJS} ${LIBFT}
 	@$(CC) $(CFLAGS) -o $@ $^
 
-${LIBFT}:
+${LIBFT}: Libft/*.c
 	@$(MAKE) -C libft/ all
 
 bonus: checker
 
-checker: $(BONUS_OBJS)
+checker: $(BONUS_OBJS) ${LIBFT}
 	@$(CC) $(CFLAGS) $(BONUS_OBJS) -o checker
+
+$(OBJS): ${LIBFT}
+
+$(BONUS_OBJS): ${LIBFT}
 
 clean:
 	@rm -rf $(OBJS) checker_bonus.o
