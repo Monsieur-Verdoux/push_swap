@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:09:46 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/29 17:02:12 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:12:47 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	rrr(t_vec *a, t_vec *b, bool check);
 int		find_max(t_vec *vec);
 int		find_min(t_vec *vec);
 void	choose_move(t_vec *a, t_vec *b, t_move *info);
-void	execute_move(t_vec *a, t_vec *b, int ind_a, int ind_b);
 void	smart_rotate(t_vec *a, t_vec *b, t_move *info);
 void	process_arguments(int argc, const char **argv, t_vec *a, t_vec *b);
 void	initialize_info_struct(t_vec *a, t_vec *b, t_move *info);

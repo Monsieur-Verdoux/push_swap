@@ -6,7 +6,7 @@
 /*   By: akovalev <akovalev@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:12 by akovalev          #+#    #+#             */
-/*   Updated: 2024/01/29 16:08:13 by akovalev         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:12:09 by akovalev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,69 +132,3 @@ void	choose_move(t_vec *a, t_vec *b, t_move *info)
 	smart_rotate(a, b, info);
 	pb(a, b, 1);
 }
-
-// void	execute_move(t_vec *a, t_vec *b, int ind_a, int ind_b)
-// {
-// 	smart_rotate(a, b, vec_int(a, ind_a), vec_int(b, ind_b));
-// 	pb(a, b);
-// }
-
-//smart_rotate_a(a, vec_int(a, ind_a));
-//smart_rotate_b(b, vec_int(b, ind_b));
-// void	smart_rotate_a(t_vec *a, int target)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (i < a->len)
-// 	{
-// 		if (vec_int(a, i) == target)
-// 		{
-// 			if (a->len - i - 1 > i)
-// 			{
-// 				i++;
-// 				while (i-- > 0)
-// 					ra(a, 1);
-// 			}
-// 			else
-// 			{
-// 				i = a->len - i;
-// 				while (i > 0)
-// 				{
-// 					rra(a, 1);
-// 					i--;
-// 				}
-// 			}
-// 		}
-// 		i++;
-// 	}
-// }
-
-// void	smart_rotate_b(t_vec *b, int target)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (i < b->len)
-// 	{
-// 		if (vec_int(b, i) == target)
-// 		{
-// 			if (b->len - i - 1 > i)
-// 			{
-// 				i++;
-// 				while (i-- > 0)
-// 					rb(b, 1);
-// 			}
-// 			else
-// 			{
-// 				i = b->len - i;
-// 				while (i > 0)
-// 				{
-// 					rrb(b, 1);
-// 					i--;
-// 				}
-// 			}
-// 		}
-// 		i++;
-// 	}
-// }
