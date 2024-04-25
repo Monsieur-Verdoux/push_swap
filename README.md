@@ -24,7 +24,8 @@ Limits:
 
 ## example
 
-```./push_swap 2 4 23 6 -1
+```
+./push_swap 2 4 23 6 -1
 pb
 pb
 sa
