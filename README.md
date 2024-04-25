@@ -25,13 +25,18 @@ Limits:
 ## example
 
 ```
-./push_swap 2 4 23 6 -1
+./push_swap 2 4 23 6 -1 501 -365
 pb
+pb
+pb
+rra
 pb
 sa
+rb
 rra
-rra
+pa
 rra
 pa
 pa
 rra
+pa
