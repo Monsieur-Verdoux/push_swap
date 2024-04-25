@@ -21,3 +21,16 @@ Limits:
 - 5 integers: 12 moves
 - 100 integers: 700 moves
 - 500 integers: 5500 moves
+
+## example
+
+```./push_swap 2 4 23 6 -1
+pb
+pb
+sa
+rra
+rra
+rra
+pa
+pa
+rra
